@@ -13,6 +13,7 @@ import skimage.morphology as morph
 import skimage.io as io
 import argparse
 import os
+
 def compose_sketch(strokes, padding) :
     
     rows = []
@@ -60,16 +61,16 @@ if __name__ == '__main__' :
     #----------------------------------------------------
     # setting paths
     #path =  '/mnt/hd-data/Datasets/quickdraw/ndjson/'
-    path = args.dir
-    destine_path = os.path.join(path, '..', 'sketches')
-    assert os.path.isdir(destine_path), '{} does not exist'.format(destine_path)
+    path_base = args.dir
+    sketch_path = os.path.join(path_base,'sketches')
+    assert os.path.isdir(sketch_path), '{} does not exist'.format(sketch_path)
     for category in categories :
-        destine_path = os.path.join(destine_path, category)
+        destine_path = os.path.join(sketch_path, category)
         if not os.path.isdir(destine_path) :
             os.mkdir(destine_path)
         #----------------------------------------------------
         # loading data as panda dataframe
-        fname = os.path.join(path, category + '.ndjson')
+        fname = os.path.join(path_base, 'ndjson', category + '.ndjson')
         print('* Reading data from {}'.format(fname))
         df = pd.read_json(fname, lines = True)
         # setting image parameters 

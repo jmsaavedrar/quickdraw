@@ -1,16 +1,16 @@
 #!/bin/bash
 
 BASE='/mnt/hd-data/Datasets/quickdraw/qd_cat_'
-
+DIR='/mnt/hd-data/Datasets/quickdraw/'
 save_sketches(){
 	COD=$(printf "%02d" $1)
 	CAT=$BASE$COD
-	echo "python read_ndjson.py --dir --category $CAT -sample 1100"
+	python read_ndjson.py -dir $DIR -category $CAT -sample 1100
 }
 
-for i in {1..10} 
+for i in {1..4} 
 do
-	save_sketches $i
+	save_sketches $i &
 done
 wait
 echo "Finishing OK"	
